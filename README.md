@@ -4,6 +4,8 @@ Install PHPUnit through Pear, MacPorts, or whatever system you use. It is availa
 
 # Step 2: Clone this repository.
 
+Or download it.
+
 # Step 3: Add concrete5
 
 1. Download a copy of the latest concrete5 development version from http://github.com/concrete5/concrete5/. 
