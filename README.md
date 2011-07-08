@@ -9,10 +9,11 @@ Or download it.
 # Step 3: Add concrete5
 
 Link to an existing installation of concrete5*, e.g.:
+
     cd concrete5-tests
     ln -s /Library/WebServer/WebSites/c541/web/ ./web
 
-* Do NOT link to a production version because it's possible some files or database values may be modified.
+(*) Do NOT link to a production version because it's possible some files or database values may be modified.
 You can download the latest development version from http://github.com/concrete5/concrete5/ and create the link as described above, but you must go through the c5 install routines before testing.
 
 # Step 4: Run tests using bootstrap.php. For example
