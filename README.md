@@ -8,14 +8,16 @@ Or download it.
 
 # Step 3: Add concrete5
 
-1. Download a copy of the latest concrete5 development version from http://github.com/concrete5/concrete5/. 
-2. Install concrete5 as you normally would. NOTE: Do not symlink to a production copy of concrete5!
-3. Ensure that your concrete5-tests/ repository has a directory named web/, and within that directory is a valid concrete5 install.
+Link to an existing installation of concrete5*, e.g.:
+    cd concrete5-tests
+    ln -s /Library/WebServer/WebSites/c541/web/ ./web
+
+* Do NOT link to a production version because it's possible some files or database values may be modified.
+You can download the latest development version from http://github.com/concrete5/concrete5/ and create the link as described above, but you must go through the c5 install routines before testing.
 
 # Step 4: Run tests using bootstrap.php. For example
 
-    cd ~/git/concrete5-tests/tests
-    phpunit --bootstrap bootstrap.php concrete/helpers/FormHelperTest.php
+    phpunit --bootstrap tests/bootstrap.php tests
     
 Expected output is something like
 
