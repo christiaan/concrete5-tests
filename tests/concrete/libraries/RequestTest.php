@@ -21,6 +21,14 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 		
 	}
 
+	public static function  setUpBeforeClass() {
+		//clear the _SERVER variables so there are no weird bugs when testing
+		unset($_SERVER['ORIG_PATH_INFO']);
+		unset($_SERVER['PATH_INFO']);
+		unset($_SERVER['SCRIPT_NAME']);
+		unset($_SERVER['REDIRECT_URL']);
+	}
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -45,10 +53,22 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 
 	public function testParsePathFromRequest() {
 		//this requires a bleeding edge version of request.php (2011-07-08) that allows us to test different paths
-		$_SERVER['ORIG_PATH_INFO'] = DIR_REL . '/' . DISPATCHER_FILENAME . '/blog/post1';
 
-		$req = Request::get();
-		$this->assertEquals('blog/post1', $req->getRequestPath());
+		//key is path, expected return request path is the value
+		$testPaths = array('/' => '',
+							DISPATCHER_FILENAME => '',
+							DISPATCHER_FILENAME . '/post' => 'post',
+							DISPATCHER_FILENAME . '/blog/post' => 'blog/post'
+						);
+
+		foreach ($testPaths as $path => $file) {
+			$_SERVER['ORIG_PATH_INFO'] = DIR_REL . '/' . $path;
+
+			$req = Request::get();
+			$this->assertEquals($file, $req->getRequestPath());
+		}
+
+		
 	}
 
 	/**
