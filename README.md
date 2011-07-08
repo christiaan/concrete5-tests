@@ -8,7 +8,7 @@ Or download it.
 
 # Step 3: Add concrete5
 
-Link to an existing installation of concrete5*, e.g.:
+Link to an existing installation of concrete5 (*), e.g.:
 
     cd concrete5-tests
     ln -s /Library/WebServer/WebSites/c541/web/ ./web
