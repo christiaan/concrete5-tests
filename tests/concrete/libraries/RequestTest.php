@@ -33,7 +33,7 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 		//we create new objects in order to test the private parse() method
 
 		//testing blocks, both with and without the .php extension
-		foreach (array('subdir/file', 'subdir/file.php', 'file', 'file.php') as $file) {
+		foreach (array('subdir/file', 'subdir/file.php', 'file', 'file.php', 'subdir/a.file.with.dots', 'subdir/a.file.with.dots.php') as $file) {
 			$req = new Request('tools/BLOCKS/block_handle/' . $file);
 
 			$this->assertEquals('BLOCK_TOOL', $req->getIncludeType());
