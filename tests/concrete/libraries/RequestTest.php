@@ -32,7 +32,7 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 	public function testParse() {
 		//we create new objects in order to test the private parse() method
 
-		//testing blocks, both with and without the .php extension
+		//testing blocks, both with and without the .php extension, with and without dots in the filename
 		foreach (array('subdir/file', 'subdir/file.php', 'file', 'file.php', 'subdir/a.file.with.dots', 'subdir/a.file.with.dots.php') as $file) {
 			$req = new Request('tools/BLOCKS/block_handle/' . $file);
 
@@ -40,11 +40,15 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 			$this->assertEquals('block_handle', $req->getBlock());
 			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $req->getFilename());
 		}
-
 		
+	}
 
+	public function testParsePathFromRequest() {
+		//this requires a bleeding edge version of request.php (2011-07-08) that allows us to test different paths
+		$_SERVER['ORIG_PATH_INFO'] = DIR_REL . '/' . DISPATCHER_FILENAME . '/blog/post1';
 
-		
+		$req = Request::get();
+		$this->assertEquals('blog/post1', $req->getRequestPath());
 	}
 
 	/**
