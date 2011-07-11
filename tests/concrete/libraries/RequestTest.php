@@ -41,12 +41,35 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 		//we create new objects in order to test the private parse() method
 
 		//testing blocks, both with and without the .php extension, with and without dots in the filename
-		foreach (array('subdir/file', 'subdir/file.php', 'file', 'file.php', 'a.file.with.dots', 'a.file.with.dots.php', 'subdir/a.file.with.dots', 'subdir/a.file.with.dots.php') as $file) {
-			$req = new Request('tools/BLOCKS/block_handle/' . $file);
+		$files = array();
+		$files[] = 'subdir/file';
+		$files[] = 'subdir/file.php';
+		$files[] = 'file';
+		$files[] = 'file.php';
+		$files[] = 'a.file.with.dots';
+		$files[] = 'a.file.with.dots.php';
+		$files[] = 'subdir/a.file.with.dots';
+		$files[] = 'subdir/a.file.with.dots.php';
+		foreach ($files as $file) {
+		
+			$block = new Request('tools/blocks/block_handle/' . $file);
+			$this->assertEquals('BLOCK_TOOL', $block->getIncludeType());
+			$this->assertEquals('block_handle', $block->getBlock());
+			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $block->getFilename());
+			
+			$package = new Request('tools/packages/package_handle/' . $file);
+			$this->assertEquals('PACKAGE_TOOL', $package->getIncludeType());
+			$this->assertEquals('package_handle', $package->getPackageHandle());
+			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $package->getFilename());
+			
+			$core = new Request('tools/required/' . $file);
+			$this->assertEquals('CONCRETE_TOOL', $core->getIncludeType());
+			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $core->getFilename());
 
-			$this->assertEquals('BLOCK_TOOL', $req->getIncludeType());
-			$this->assertEquals('block_handle', $req->getBlock());
-			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $req->getFilename());
+			$tool = new Request('tools/' . $file);
+			$this->assertEquals('TOOL', $tool->getIncludeType());
+			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $tool->getFilename());
+
 		}
 		
 	}
