@@ -44,12 +44,17 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 		$files = array();
 		$files[] = 'subdir/file';
 		$files[] = 'subdir/file.php';
+		$files[] = 'sub.dir.with.dots/file';
+		$files[] = 'sub.dir.with.dots/file.php';
 		$files[] = 'file';
 		$files[] = 'file.php';
 		$files[] = 'a.file.with.dots';
 		$files[] = 'a.file.with.dots.php';
 		$files[] = 'subdir/a.file.with.dots';
 		$files[] = 'subdir/a.file.with.dots.php';
+		$files[] = 'sub.dir.with.dots/a.file.with.dots';
+		$files[] = 'sub.dir.with.dots/a.file.with.dots.php';
+		
 		foreach ($files as $file) {
 		
 			$block = new Request('tools/blocks/block_handle/' . $file);
@@ -72,14 +77,19 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 
 		}
 		$files = array();
+		$files = array();
 		$files[] = 'subdir/file';
 		$files[] = 'subdir/file.css';
+		$files[] = 'sub.dir.with.dots/file';
+		$files[] = 'sub.dir.with.dots/file.css';
 		$files[] = 'file';
 		$files[] = 'file.css';
 		$files[] = 'a.file.with.dots';
 		$files[] = 'a.file.with.dots.css';
 		$files[] = 'subdir/a.file.with.dots';
 		$files[] = 'subdir/a.file.with.dots.css';
+		$files[] = 'sub.dir.with.dots/a.file.with.dots';
+		$files[] = 'sub.dir.with.dots/a.file.with.dots.css';
 	
 		foreach ($files as $file) {
 		
