@@ -71,7 +71,24 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 			$this->assertEquals($file . (substr($file, -3) == 'php' ? '' : '.php'), $tool->getFilename());
 
 		}
+		$files = array();
+		$files[] = 'subdir/file';
+		$files[] = 'subdir/file.css';
+		$files[] = 'file';
+		$files[] = 'file.css';
+		$files[] = 'a.file.with.dots';
+		$files[] = 'a.file.with.dots.css';
+		$files[] = 'subdir/a.file.with.dots';
+		$files[] = 'subdir/a.file.with.dots.css';
+	
+		foreach ($files as $file) {
 		
+			$css = new Request('tools/css/themes/theme_handle/' . $file);
+			$this->assertEquals('CONCRETE_TOOL', $css->getIncludeType());
+			$this->assertEquals('theme_handle', $css->getAuxiliaryData()->theme);
+			$this->assertEquals($file . (substr($file, -3) == 'css' ? '' : '.css'), $css->getAuxiliaryData()->file);
+		}
+
 	}
 
 	public function testParsePathFromRequest() {
