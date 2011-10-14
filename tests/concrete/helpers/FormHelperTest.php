@@ -67,6 +67,9 @@ class FormHelperTest extends PHPUnit_Framework_TestCase {
 		//test where valueOrArray is value
 		$html = $this->object->text('element', 'value', array('arbitrary' => 'arbitrary', 'class' => 'test-class'));
 		$this->assertAttributes($html, array('class' => array('test-class', 'ccm-input-text'), 'value' => 'value', 'arbitrary' => 'arbitrary', 'type' => 'text'));
+		
+		//regression test bug http://www.concrete5.org/developers/bugs/5-4-2-2/formhelper-evals-input-names-which-might-result-in-syntax-errors/
+		$this->object->text('element[empty]');
 	}
 
 	public function testEmail() {
